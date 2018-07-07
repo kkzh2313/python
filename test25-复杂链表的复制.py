@@ -11,6 +11,11 @@
 3. 拆分成两个链表，奇数位置为原链表，偶数位置为复制链表，
 注意复制链表的最后一个结点的next指针不能跟原链表指向同一个空结点None，
 next指针要重新赋值None(判定程序会认定你没有完成复制）
+注意：
+注意链表结点进行复制的时候，不能简单地写作 pCloned = pNode，
+这样的话之后对pCloned的操作也会作用在pNode上面，导致操作循环往复。
+需要重新定一个pCloned = ListNode(0)，然后对结点的.val .next .random 进行设置。
+同时，在将复制的结点的random指向原始链表结点的random的next的时候，需要先判断一下，原始链表结点的next是否为None，不为None再指向。
 '''
 # -*- coding:utf-8 -*-
 class RandomListNode:
