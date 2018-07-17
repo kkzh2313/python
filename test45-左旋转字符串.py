@@ -4,7 +4,6 @@
 例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。
 '''
 
-#这一方法比书上更全面，不仅可以移动比字符串长度大的位数了
 #“先补后切”  这里空间复杂度为O(N)，
 class Solution:
     def LeftRotateString(self, s, n):
