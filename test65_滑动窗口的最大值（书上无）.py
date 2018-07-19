@@ -21,15 +21,15 @@
 
 class Solution:
     def maxInWindows(self, num, size):
-        if num == None or size > len(num):
-            return num
+        if num == None or size<=0:
+            return []
         res,que = [],[] # 存放窗口最大值的数组，以及辅助队列数组（存放符合要求数的索引）
         for i in range(len(num)):
-            while len(que)>0 and num[i]>num[que[-1]]:
+            while len(que) and num[i]>num[que[-1]]:
                 que.pop()
-            if len(que)>0 and i-que[0]+1 > size:
+            while len(que) and i-que[0]+1 > size:
                 que.pop(0)
-            que.append(num[i])
+            que.append(i)
             if i+1 >= size:
                 res.append(num[que[0]])
         return res
