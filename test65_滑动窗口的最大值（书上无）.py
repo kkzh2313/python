@@ -13,34 +13,29 @@
  *     2）前面比k大的X，比较两者下标，判断X是否已不在窗口之内，不在了，直接移出队列
  *     队列的第一个元素是滑动窗口中的最大值
 '''
-#该方法循环比较多
-# -*- coding:utf-8 -*-
+'''建立辅助数组（队列）来存放输入数组的元素（位置索引）
+首先看辅助数组前面的数有比当前元素值小的就从辅助数组删除（--用到循环）
+接下来检查当前新数的索引与辅助数组第一个（该位置是最大值）差距是否大于窗口？ 大于就去掉辅助数组第一个数
+            辅助数组处理的情况判断完，在数组后面放进该新元素
+最后判断当前新数的索引是否已经超过窗口范围，超过了才能将辅助数组第一个（也就是最大值）放进结果数组里'''
+
 class Solution:
     def maxInWindows(self, num, size):
-        if not num or size <= 0:
-            return []
-        deque = []
-        if len(num) >= size:
-            index = []
-            for i in range(size):
-                while len(index) > 0 and num[i] > num[index[-1]]:
-                    index.pop()
-                index.append(i)
-
-            for i in range(size, len(num)):
-                deque.append(num[index[0]])
-                while len(index) > 0 and num[i] >= num[index[-1]]:
-                    index.pop()
-                if len(index) > 0 and index[0] <= i - size:
-                    index.pop(0)
-                index.append(i)
-
-            deque.append(num[index[0]])
-        return deque
-if __name__ == '__main__':
-    test = [2, 3, 4, 2, 6, 2, 5, 1]
-    s = Solution()
-    print(s.maxInWindows(test, 3))
+        if num == None or size > len(num):
+            return num
+        res,que = [],[] # 存放窗口最大值的数组，以及辅助队列数组（存放符合要求数的索引）
+        for i in range(len(num)):
+            while len(que)>0 and num[i]>num[que[-1]]:
+                que.pop()
+            if len(que)>0 and i-que[0]+1 > size:
+                que.pop(0)
+            que.append(num[i])
+            if i+1 >= size:
+                res.append(num[que[0]])
+        return res
+s=Solution1()
+num = [2, 3, 4, 2, 6, 2, 5, 1]
+print(s.maxInWindows(num,3))
 
 '''
 链接：https://www.nowcoder.com/questionTerminal/1624bc35a45c42c0bc17d17fa0cba788
