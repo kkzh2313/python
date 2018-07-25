@@ -12,6 +12,10 @@ class Solution:
             return False
         length = len(sequence)
         root = sequence[-1]
+        '''
+        注意这里提前声明一个变量index来保存i，因为递归到最后序列只剩一个值，
+        range(1-1)导致第一个for循环不执行，导致后面的第二个循环里i前面没出现。。。。此时改为 for i in range（length）
+        '''
         index = 0
         #遍历的范围是除最后一个根节点外前面的序列
         for i in range(length-1):
